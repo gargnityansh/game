@@ -1,4 +1,9 @@
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 class Game
 {
 	public static void main(String args[])
@@ -8,15 +13,50 @@ class Game
 		{
 			Scanner scan = new Scanner(System.in);
 			int count = 10;
-			String m = "jodha akbar";
-			String movie = m.toUpperCase();
-			int len = movie.length();
-			char film[] = new char[len];
+			String m = "";
+			//String movie = m.toUpperCase();
+			//int len = movie.length();
+			//char film[] = new char[len];
+			try 
+			{
+
+           		Random rand = new Random();
+            	int number = rand.nextInt(1285);
+
+            	File f = new File("D:/java_project/films.txt");
+
+	            BufferedReader b = new BufferedReader(new FileReader(f));
+	            String readLine = "";
+
+    	        System.out.println("Reading file using Buffered Reader");
+        	    int i = 0;
+            	//System.out.println(number);
+
+		            while ((readLine = b.readLine()) != null)
+		            {
+	            		if (number == i)
+    	     		   	{
+        	    			//System.out.println(readLine);
+            				m = readLine;
+            				break;
+            			}
+    	        		else
+        	    		{
+            				i++;
+      		    	  	}
+      			    }
+	        }catch (IOException e) 
+	        	{
+    	        	e.printStackTrace();
+        		}
+        	String movie = m.toUpperCase();
+        	int len = movie.length();
+        	char film[] = new char[len];
 			for(int i=0;i<len;i++)
 			{
 				if(movie.charAt(i) == ' ')
 				{
-					System.out.print("/");
+					System.out.print(" / ");
 					film[i] = '/';
 				}
 				else
@@ -62,6 +102,7 @@ class Game
 				}
 				if (num == 0)
 				{
+					System.out.println("movie is: " + movie);
 					System.out.println("Congratulations! You have won this game.");
 					break;
 				}
